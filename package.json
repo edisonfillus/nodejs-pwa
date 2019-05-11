@@ -27,5 +27,8 @@
     "progressive-web-app",
     "pwa",
     "installable web app"
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  }
 }
