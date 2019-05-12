@@ -70,3 +70,52 @@ self.addEventListener('fetch', (evt) => {
       })
   );
 });
+
+
+
+
+
+/* Cache, falling back to network when not cached
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request).then(function(response) {
+      return response || fetch(event.request);
+    })
+  );
+}); */
+
+
+/* Cache the page before showing notification on a push event 
+self.addEventListener('push', function(event) {
+  if (event.data.text() == 'new-email') {
+    event.waitUntil(
+      caches.open('mysite-dynamic').then(function(cache) {
+        return fetch('/inbox.json').then(function(response) {
+          cache.put('/inbox.json', response.clone());
+          return response.json();
+        });
+      }).then(function(emails) {
+        registration.showNotification("New email", {
+          body: "From " + emails[0].from.name,
+          tag: "new-email"
+        });
+      })
+    );
+  }
+});
+
+self.addEventListener('notificationclick', function(event) {
+  if (event.notification.tag == 'new-email') {
+    // Assume that all of the resources needed to render
+    // /inbox/ have previously been cached, e.g. as part
+    // of the install handler.
+    new WindowClient('/inbox/');
+  }
+});
+*/
+
+
+/* 
+Offline Cookbook
+https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/
+*/
